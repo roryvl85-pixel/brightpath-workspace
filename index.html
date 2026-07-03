@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rory Lodewick — Ghostwriting & Workflow Automation</title>
+<meta name="description" content="Ghostwriting and workflow automation, done personally. Now taking on a small number of free pilot clients.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✍️</text></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <span class="brand">Rory Lodewick</span>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#pilot">The pilot</a>
+      <a href="#start" class="nav-cta">Get started</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Now taking on a small number of free pilot clients</p>
+      <h1>Ghostwriting and workflow automation for founders who'd rather focus on the work.</h1>
+      <p class="lede">I write the content you don't have time for, and automate the manual tasks eating your week — both done hands-on, by me personally, not a team or a template.</p>
+      <a href="#start" class="btn btn-primary">Tell me what you need</a>
+    </div>
+  </section>
+
+  <section id="services" class="services">
+    <div class="wrap">
+      <h2>Two ways I can help</h2>
+      <div class="service-grid">
+
+        <article class="service-card">
+          <div class="service-icon" aria-hidden="true">✍️</div>
+          <h3>Ghostwriting</h3>
+          <p>LinkedIn posts, newsletters, founder content — written in your voice, not mine.</p>
+          <ul>
+            <li>Content that sounds like you, not a generic AI voice</li>
+            <li>Built from a short intake so I understand your industry and goals</li>
+            <li>A steady, sustainable posting rhythm you can actually keep up with</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon" aria-hidden="true">⚙️</div>
+          <h3>Workflow Automation</h3>
+          <p>One clear manual process, automated — no bloated platform, no long onboarding.</p>
+          <ul>
+            <li>A single automation that removes a real bottleneck from your week</li>
+            <li>Built around the tools you already use — no new software to learn</li>
+            <li>Kept simple and reliable, not over-engineered</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="pilot" class="pilot">
+    <div class="wrap">
+      <h2>Why this is free right now</h2>
+      <p>I'm running a small pilot with a handful of people before opening this up more broadly. In exchange for the work, I just ask for honest feedback and — if you're happy with the result — a short testimonial.</p>
+      <p class="pilot-note">No payment, no contract, no catch. Just real work, done well, for a few early testers.</p>
+    </div>
+  </section>
+
+  <section id="start" class="start">
+    <div class="wrap">
+      <h2>Ready to start?</h2>
+      <p>Tell me a bit about what you need — takes a couple of minutes.</p>
+
+      <div class="form-embed">
+        <!-- Replace REPLACE_WITH_TALLY_FORM_ID with the real Tally form ID once the form is built -->
+        <iframe
+          data-tally-src="https://tally.so/embed/REPLACE_WITH_TALLY_FORM_ID?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+          loading="lazy"
+          width="100%"
+          height="600"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+          title="Services intake form">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; 2026 Rory Lodewick. Built one project at a time.</p>
+  </div>
+</footer>
+
+<script>
+  var d = document, w = "https://tally.so/widgets/embed.js",
+    v = function () {
+      "undefined" != typeof Tally
+        ? Tally.loadEmbeds()
+        : d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) {
+            e.src = e.dataset.tallySrc;
+          });
+    };
+  if ("undefined" != typeof Tally) v();
+  else if (d.querySelector('script[src="' + w + '"]') == null) {
+    var s = d.createElement("script");
+    s.src = w;
+    s.onload = v;
+    s.onerror = v;
+    d.body.appendChild(s);
+  }
+</script>
+
+</body>
+</html>
