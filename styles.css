@@ -190,6 +190,20 @@ section h2 {
 .service-card li { margin-bottom: 8px; }
 .service-card li:last-child { margin-bottom: 0; }
 
+.about {
+  padding: 64px 0;
+}
+
+.about p {
+  max-width: 65ch;
+  font-size: 1.05rem;
+  margin: 0 0 16px;
+}
+
+.about p:last-child {
+  margin-bottom: 0;
+}
+
 .pilot {
   padding: 64px 0;
   background: var(--surface);
