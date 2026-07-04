@@ -1,26 +1,29 @@
 :root {
-  --bg: #fbfaf8;
-  --surface: #ffffff;
-  --text: #1c1b19;
-  --text-muted: #5b584f;
-  --border: #e7e3da;
-  --accent: #b5651d;
-  --accent-ink: #ffffff;
+  /* Signal & Script brand palette (validated) */
+  --bg: #EDE8DD;      /* Paper */
+  --surface: #FFFFFF;
+  --text: #1B1F2A;    /* Ink */
+  --text-muted: #5B6270;
+  --border: #DDD5C4;
+  --accent: #2F6F6B;  /* Teal — primary functional color */
+  --accent-ink: #FFFFFF;
+  --gold: #C9A227;    /* Gold — sparing accent only, never a dominant color */
   --radius: 12px;
-  --shadow: 0 1px 2px rgba(28,27,25,0.04), 0 8px 24px rgba(28,27,25,0.06);
+  --shadow: 0 1px 2px rgba(27,31,42,0.04), 0 8px 24px rgba(27,31,42,0.06);
   --max-width: 960px;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #16151a;
-    --surface: #1e1d24;
-    --text: #f2f0ea;
-    --text-muted: #b3b0a6;
-    --border: #322f38;
-    --accent: #e0954f;
-    --accent-ink: #16151a;
+    --bg: #12141c;
+    --surface: #1b1f2a;
+    --text: #EDE8DD;
+    --text-muted: #a9adbb;
+    --border: #2a2f3d;
+    --accent: #4fa39d;
+    --accent-ink: #0d1117;
+    --gold: #e0b84a;
     --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
     color-scheme: dark;
   }
@@ -99,7 +102,7 @@ body {
 
 .eyebrow {
   display: inline-block;
-  color: var(--accent);
+  color: var(--gold);
   font-weight: 600;
   font-size: 0.85rem;
   text-transform: uppercase;
