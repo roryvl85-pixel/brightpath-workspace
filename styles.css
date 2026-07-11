@@ -190,14 +190,6 @@ section h2 {
 .service-card li { margin-bottom: 8px; }
 .service-card li:last-child { margin-bottom: 0; }
 
-.service-note {
-  margin: 16px 0 0;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-  font-size: 0.92rem;
-  color: var(--text-muted);
-}
-
 .about {
   padding: 64px 0;
 }
@@ -227,19 +219,6 @@ section h2 {
 .pilot-note {
   color: var(--text-muted);
   font-size: 0.95rem;
-}
-
-.faq { padding: 64px 0; }
-
-.faq-item h3 {
-  font-size: 1.1rem;
-  margin: 0 0 8px;
-}
-
-.faq-item p {
-  max-width: 65ch;
-  color: var(--text-muted);
-  margin: 0;
 }
 
 .start { padding: 64px 0 96px; }
