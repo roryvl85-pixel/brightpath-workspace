@@ -118,13 +118,6 @@ h1 {
   max-width: 22ch;
 }
 
-.lede {
-  font-size: 1.15rem;
-  color: var(--text-muted);
-  max-width: 56ch;
-  margin: 0 0 32px;
-}
-
 .btn {
   display: inline-block;
   text-decoration: none;
@@ -150,6 +143,36 @@ section h2 {
   margin: 0 0 32px;
 }
 
+.education {
+  padding: 64px 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.education p {
+  max-width: 65ch;
+  font-size: 1.05rem;
+  margin: 0 0 16px;
+}
+
+.education .list-lead {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.outcome-list {
+  margin: 0 0 24px;
+  padding-left: 20px;
+  max-width: 65ch;
+}
+
+.outcome-list li {
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+}
+
+.outcome-list li:last-child { margin-bottom: 0; }
+
 .services { padding: 64px 0; }
 
 .service-grid {
@@ -164,6 +187,21 @@ section h2 {
   border-radius: var(--radius);
   padding: 32px;
   box-shadow: var(--shadow);
+}
+
+.service-card--primary {
+  border-color: var(--accent);
+  border-width: 2px;
+}
+
+.service-badge {
+  display: inline-block;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 12px;
 }
 
 .service-icon {
@@ -223,9 +261,20 @@ section h2 {
 
 .start { padding: 64px 0 96px; }
 
-.start > .wrap > p {
+.start > .wrap > p:first-of-type {
   color: var(--text-muted);
   margin-top: -20px;
+  margin-bottom: 16px;
+}
+
+.form-note {
+  max-width: 65ch;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+}
+
+.form-note:last-of-type {
   margin-bottom: 32px;
 }
 
