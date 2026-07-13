@@ -100,16 +100,6 @@ body {
   padding: 88px 0 72px;
 }
 
-.eyebrow {
-  display: inline-block;
-  color: var(--gold);
-  font-weight: 600;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin: 0 0 16px;
-}
-
 h1 {
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1.15;
@@ -242,29 +232,24 @@ section h2 {
   margin-bottom: 0;
 }
 
-.pilot {
-  padding: 64px 0;
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.pilot p {
-  max-width: 60ch;
-  font-size: 1.05rem;
-}
-
-.pilot-note {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-}
-
 .start { padding: 64px 0 96px; }
 
 .start > .wrap > p:first-of-type {
   color: var(--text-muted);
   margin-top: -20px;
   margin-bottom: 16px;
+}
+
+.form-price {
+  max-width: 65ch;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin: 0 0 24px;
 }
 
 .form-note {
