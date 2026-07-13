@@ -232,6 +232,27 @@ section h2 {
   margin-bottom: 0;
 }
 
+.about .signature {
+  margin: 32px 0 0;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.industries {
+  padding: 64px 0;
+}
+
+.industries p {
+  max-width: 65ch;
+  font-size: 1.05rem;
+  margin: 0 0 16px;
+}
+
+.industries p:last-child {
+  margin-bottom: 0;
+}
+
 .deliverables {
   padding: 64px 0;
   background: var(--surface);
