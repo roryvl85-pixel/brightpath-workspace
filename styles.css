@@ -232,6 +232,29 @@ section h2 {
   margin-bottom: 0;
 }
 
+.deliverables {
+  padding: 64px 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.deliverables p {
+  max-width: 65ch;
+  font-size: 1.05rem;
+  margin: 0 0 16px;
+}
+
+.deliverables h3 {
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  margin: 32px 0 16px;
+}
+
+.deliverables p:last-child {
+  margin-bottom: 0;
+}
+
 .start { padding: 64px 0 96px; }
 
 .start > .wrap > p:first-of-type {
