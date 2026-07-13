@@ -255,6 +255,23 @@ section h2 {
   margin-bottom: 0;
 }
 
+.any-size {
+  padding: 64px 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.any-size p {
+  max-width: 65ch;
+  font-size: 1.05rem;
+  margin: 0 0 16px;
+}
+
+.any-size p:last-child {
+  margin-bottom: 0;
+}
+
 .start { padding: 64px 0 96px; }
 
 .start > .wrap > p:first-of-type {
