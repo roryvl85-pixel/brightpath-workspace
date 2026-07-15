@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrightPath — AI Learning Companions for South African Students</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0F2A5E;
+    --navy-mid: #1A4A8A;
+    --gold: #C9972A;
+    --gold-light: #F0C84A;
+    --off-white: #F7F9FC;
+    --pale-blue: #E8F0FB;
+    --body: #2D2D2D;
+    --mid-gray: #6B7280;
+    --light-gray: #E5E7EB;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--body);
+    background: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(15, 42, 94, 0.97);
+    backdrop-filter: blur(8px);
+    padding: 0 24px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy) !important;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--navy) 0%, #0A1F47 60%, #162F5E 100%);
+    display: flex;
+    align-items: center;
+    padding: 100px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,151,42,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26,74,138,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: rgba(201,151,42,0.15);
+    border: 1px solid rgba(201,151,42,0.4);
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 36px;
+    line-height: 1.7;
+    max-width: 460px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(201,151,42,0.3);
+  }
+
+  .btn-secondary {
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* HERO CARD */
+  .hero-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 28px;
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .avatar {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    color: var(--navy);
+    font-size: 16px;
+  }
+
+  .hero-card-name {
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .hero-card-sub {
+    color: rgba(255,255,255,0.5);
+    font-size: 12px;
+  }
+
+  .live-dot {
+    margin-left: auto;
+    width: 8px; height: 8px;
+    background: #4ADE80;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.3); }
+  }
+
+  .waveform {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 40px;
+    margin-bottom: 20px;
+  }
+
+  .wave-bar {
+    width: 4px;
+    background: var(--gold);
+    border-radius: 2px;
+    animation: wave 1.2s ease-in-out infinite;
+  }
+
+  .wave-bar:nth-child(1) { height: 16px; animation-delay: 0s; }
+  .wave-bar:nth-child(2) { height: 28px; animation-delay: 0.1s; }
+  .wave-bar:nth-child(3) { height: 20px; animation-delay: 0.2s; }
+  .wave-bar:nth-child(4) { height: 36px; animation-delay: 0.3s; }
+  .wave-bar:nth-child(5) { height: 24px; animation-delay: 0.4s; }
+  .wave-bar:nth-child(6) { height: 32px; animation-delay: 0.5s; }
+  .wave-bar:nth-child(7) { height: 18px; animation-delay: 0.6s; }
+  .wave-bar:nth-child(8) { height: 28px; animation-delay: 0.7s; }
+  .wave-bar:nth-child(9) { height: 22px; animation-delay: 0.8s; }
+  .wave-bar:nth-child(10) { height: 14px; animation-delay: 0.9s; }
+
+  @keyframes wave {
+    0%, 100% { transform: scaleY(0.6); opacity: 0.6; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+
+  .session-message {
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+
+  .session-message p {
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .session-report {
+    background: rgba(201,151,42,0.1);
+    border: 1px solid rgba(201,151,42,0.25);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 16px;
+  }
+
+  .session-report-title {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .session-report p {
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--pale-blue);
+    padding: 20px 24px;
+    text-align: center;
+    border-bottom: 1px solid var(--light-gray);
+  }
+
+  .trust-bar p {
+    color: var(--mid-gray);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .trust-bar strong { color: var(--navy); }
+
+  /* SECTIONS */
+  section { padding: 80px 24px; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--mid-gray);
+    max-width: 580px;
+    line-height: 1.7;
+  }
+
+  /* PRODUCTS */
+  .products { background: var(--off-white); }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
+  }
+
+  .product-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(15,42,94,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(15,42,94,0.14);
+  }
+
+  .product-card-top {
+    padding: 36px 32px 28px;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card-top.atlas-top {
+    background: linear-gradient(135deg, #0A1F47, #1A3A7A);
+  }
+
+  .product-card-top::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    background: rgba(201,151,42,0.08);
+    border-radius: 50%;
+  }
+
+  .product-icon {
+    width: 52px; height: 52px;
+    background: rgba(201,151,42,0.15);
+    border: 1px solid rgba(201,151,42,0.3);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+
+  .product-card-top h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .product-card-top p {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+  }
+
+  .product-card-body {
+    padding: 28px 32px 32px;
+  }
+
+  .product-features {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+
+  .product-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--body);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--light-gray);
+    line-height: 1.5;
+  }
+
+  .product-features li:last-child { border-bottom: none; }
+
+  .check {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .product-badge {
+    display: inline-block;
+    background: rgba(201,151,42,0.1);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-top: 16px;
+  }
+
+  /* HOW IT WORKS */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .step {
+    text-align: center;
+    position: relative;
+  }
+
+  .step::after {
+    content: '→';
+    position: absolute;
+    top: 24px;
+    right: -16px;
+    color: var(--light-gray);
+    font-size: 20px;
+    font-weight: 300;
+  }
+
+  .step:last-child::after { display: none; }
+
+  .step-number {
+    width: 52px; height: 52px;
+    background: var(--navy);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0 auto 16px;
+  }
+
+  .step h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .step p {
+    font-size: 13px;
+    color: var(--mid-gray);
+    line-height: 1.6;
+  }
+
+  /* PRICING */
+  .pricing { background: var(--off-white); }
+
+  .pricing-toggle {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .toggle-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    padding: 8px 20px;
+    border-radius: 100px;
+    transition: all 0.2s;
+  }
+
+  .toggle-label.active {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .price-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px;
+    border: 1.5px solid var(--light-gray);
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .price-card:hover {
+    border-color: var(--navy-mid);
+    box-shadow: 0 8px 32px rgba(15,42,94,0.1);
+    transform: translateY(-2px);
+  }
+
+  .price-card.featured {
+    border-color: var(--gold);
+    box-shadow: 0 8px 32px rgba(201,151,42,0.15);
+  }
+
+  .featured-tag {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .price-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .price-card .price-desc {
+    font-size: 13px;
+    color: var(--mid-gray);
+    margin-bottom: 20px;
+  }
+
+  .price-amount {
+    margin-bottom: 24px;
+  }
+
+  .price-amount .amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+  }
+
+  .price-amount .period {
+    font-size: 13px;
+    color: var(--mid-gray);
+    margin-left: 4px;
+  }
+
+  .price-sessions {
+    background: var(--pale-blue);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--navy-mid);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .price-features {
+    list-style: none;
+    margin-bottom: 24px;
+  }
+
+  .price-features li {
+    font-size: 13px;
+    color: var(--body);
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .price-features li::before {
+    content: '✓';
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .price-cta {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .price-cta-primary {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  .price-cta-primary:hover { background: var(--navy-mid); }
+
+  .price-cta-secondary {
+    border: 1.5px solid var(--light-gray);
+    color: var(--navy);
+  }
+
+  .price-cta-secondary:hover { border-color: var(--navy); }
+
+  /* WHY LUMI */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(15,42,94,0.08);
+  }
+
+  .comparison-table th {
+    background: var(--navy);
+    color: #fff;
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .comparison-table th:first-child { width: 30%; }
+
+  .comparison-table td {
+    padding: 14px 20px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--light-gray);
+    vertical-align: middle;
+  }
+
+  .comparison-table tr:last-child td { border-bottom: none; }
+  .comparison-table tr:nth-child(even) td { background: var(--off-white); }
+
+  .yes { color: #16A34A; font-weight: 700; }
+  .no { color: #DC2626; font-weight: 500; }
+  .lumi-col { color: var(--gold); font-weight: 700; }
+
+  /* REGISTER SECTION */
+  .register {
+    background: var(--navy);
+    padding: 80px 24px;
+  }
+
+  .register-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .register .section-title { color: #fff; }
+  .register .section-sub { color: rgba(255,255,255,0.65); margin: 0 auto 40px; }
+
+  .tabs {
+    display: flex;
+    gap: 0;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 32px;
+    justify-content: center;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .tab.active {
+    background: var(--gold);
+    color: var(--navy);
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .tally-embed {
+    background: #ffffff;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+  }
+
+  .tally-embed p {
+    color: #2D2D2D;
+    font-size: 15px;
+    margin-bottom: 24px;
+    line-height: 1.7;
+  }
+
+  .atlas-coming {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 48px 32px;
+  }
+
+  .atlas-coming h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .atlas-coming p {
+    color: rgba(255,255,255,0.6);
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+
+  .notify-form {
+    display: flex;
+    gap: 12px;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .notify-form input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .notify-form input::placeholder { color: rgba(255,255,255,0.4); }
+  .notify-form input:focus { border-color: var(--gold); }
+
+  .notify-form button {
+    padding: 12px 20px;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+
+  .notify-form button:hover { background: var(--gold-light); }
+
+  /* TESTIMONIAL */
+  .testimonial-section { background: var(--pale-blue); }
+
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .testimonial-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 2px 16px rgba(15,42,94,0.06);
+  }
+
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: var(--gold);
+    line-height: 0.8;
+    margin-bottom: 12px;
+  }
+
+  .testimonial-card p {
+    font-size: 15px;
+    color: var(--body);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .author-avatar {
+    width: 40px; height: 40px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .author-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .author-role {
+    font-size: 12px;
+    color: var(--mid-gray);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #070F1E;
+    padding: 48px 24px 32px;
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 40px;
+  }
+
+  .footer-brand .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .footer-brand .logo span { color: var(--gold); }
+
+  .footer-brand p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+    max-width: 280px;
+  }
+
+  .footer-col h5 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 16px;
+  }
+
+  .footer-col ul { list-style: none; }
+
+  .footer-col ul li {
+    margin-bottom: 10px;
+  }
+
+  .footer-col ul li a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+
+  .footer-col ul li a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-bottom p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .footer-bottom a {
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-bottom a:hover { color: var(--gold); }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .hero-card { display: none; }
+
+    .products-grid { grid-template-columns: 1fr; }
+
+    .steps {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .step::after { display: none; }
+
+    .pricing-grid { grid-template-columns: 1fr; }
+
+    .nav-links { display: none; }
+
+    .testimonial-grid { grid-template-columns: 1fr; }
+
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+
+    .notify-form { flex-direction: column; }
+
+    .comparison-table { font-size: 12px; }
+    .comparison-table th, .comparison-table td { padding: 10px 12px; }
+
+    .intro-banner { flex-direction: column; }
+  }
+
+  /* FOUNDER MESSAGE */
+  .founder-section {
+    background: var(--pale-blue);
+    padding: 72px 24px;
+  }
+
+  .founder-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .founder-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+  }
+
+  .founder-message {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--body);
+    text-align: left;
+  }
+
+  .founder-message p { margin-bottom: 16px; }
+
+  .founder-signature {
+    margin-top: 24px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--navy);
+    text-align: left;
+  }
+
+  .founder-signature span {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--mid-gray);
+    margin-top: 2px;
+  }
+
+  /* INTRO SESSION BANNER */
+  .intro-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 16px 24px;
+    margin: 0 auto 40px;
+    max-width: 720px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .intro-banner strong { color: var(--gold-light); }
+
+  .intro-banner a {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  /* ASSESSMENT TOOL */
+  .assessment-section { background: var(--off-white); }
+
+  .assessment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .assessment-designed {
+    max-width: 720px;
+    margin: 0 auto 32px;
+    text-align: center;
+  }
+
+  .assessment-designed h4 {
+    font-family: 'Playfair Display', serif;
+    color: var(--navy);
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .assessment-designed p {
+    color: var(--mid-gray);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .assessment-disclaimer {
+    max-width: 720px;
+    margin: 0 auto 32px;
+    background: var(--pale-blue);
+    border-left: 3px solid var(--navy-mid);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--mid-gray);
+    line-height: 1.7;
+  }
+
+  .assessment-section .tally-embed {
+    max-width: 700px;
+    margin: 0 auto;
+    border: 1px solid var(--light-gray);
+    box-shadow: 0 1px 3px rgba(15,42,94,0.06);
+  }
+</style>
+<style>@keyframes _spin_evhv6_1{0%{transform:rotate(0)}to{transform:rotate(360deg)}}@keyframes _wave_evhv6_1{0%{transform:rotate(0)}50%{transform:rotate(20deg)}to{transform:rotate(0)}}@keyframes _heartBeat_evhv6_1{0%{transform:scale(1)}50%{transform:scale(1.08)}to{transform:scale(1)}}@keyframes _flash_evhv6_1{0%,50%,to{opacity:1}25%,75%{opacity:.2}}@keyframes _bounce_evhv6_1{0%,20%,53%,to{transform:translate(0,0)}40%,43%{transform:translateY(-30px)scaleY(1.1)}70%{transform:translateY(-15px)scaleY(1.05)}80%{transform:translate(0,0)scaleY(.95)}90%{transform:translateY(-4px)scaleY(1.02)}}@keyframes _rubberBand_evhv6_1{0%{transform:scale(1)}30%{transform:scale(1.25,.75)}40%{transform:scale(.75,1.25)}50%{transform:scale(1.15,.85)}65%{transform:scale(.95,1.05)}75%{transform:scale(1.05,.95)}to{transform:scale(1)}}@keyframes _headShake_evhv6_1{0%{transform:translate(0)}6.5%{transform:translate(-6px)rotateY(-9deg)}18.5%{transform:translate(5px)rotateY(7deg)}31.5%{transform:translate(-3px)rotateY(-5deg)}43.5%{transform:translate(2px)rotateY(3deg)}50%{transform:translate(0)}}@keyframes _tada_evhv6_1{0%{transform:scale(1)}10%,20%{transform:scale3d(.9,.9,.9)rotate(-3deg)}30%,50%,70%,90%{transform:scale3d(1.1,1.1,1.1)rotate(3deg)}40%,60%,80%{transform:scale3d(1.1,1.1,1.1)rotate(-3deg)}to{transform:scale(1)}}._overlay_evhv6_157{z-index:1000000006;background-color:#0f0f0f99;justify-content:center;align-items:center;display:flex;position:fixed;inset:0}._layoutDefault_evhv6_170{z-index:2147483000;opacity:0;background-color:#0000;border-radius:5px;width:auto;max-width:95vw;height:auto;display:flex;position:fixed;bottom:20px;right:20px;box-shadow:0 0 0 1px #0f0f0f0d,0 3px 6px #0f0f0f1a,0 9px 24px #0f0f0f33}._layoutModal_evhv6_186{z-index:2147483000;opacity:0;background-color:#0000;border-radius:5px;width:700px;max-width:95vw;height:auto;display:flex;position:relative;box-shadow:0 0 0 1px #0f0f0f0d,0 3px 6px #0f0f0f1a,0 9px 24px #0f0f0f33}._popupContainer_evhv6_200{border-radius:5px;width:100%;display:flex;overflow-y:auto}._popupContainer_evhv6_200 iframe{border-radius:5px;max-height:95vh}._loadingIndicator_evhv6_212{z-index:2147483000;color:#444;background-color:#f5f5f5;border-radius:50%;justify-content:center;align-items:center;width:50px;height:50px;display:inline-flex;position:absolute}._loadingIndicatorNoOverlay_evhv6_225{position:fixed;bottom:10px;right:10px}._loadingIndicator_evhv6_212 svg{width:20px;height:20px;animation:1.618s linear infinite _spin_evhv6_1}._emoji_evhv6_237{font-size:42px;line-height:1;display:inline-block;position:absolute;top:-21px;left:-21px}._animate__wave_evhv6_246{animation:1s ease-in-out 20 _wave_evhv6_1}._animate__heart-beat_evhv6_250{animation:1.3s ease-in-out 20 _heartBeat_evhv6_1}._animate__flash_evhv6_254{animation:2.5s 20 _flash_evhv6_1}._animate__bounce_evhv6_258{transform-origin:bottom;animation:1.5s 20 _bounce_evhv6_1}._animate__rubber-band_evhv6_263{animation:1.5s 20 _rubberBand_evhv6_1}._animate__head-shake_evhv6_267{animation:1.5s ease-in-out 20 _headShake_evhv6_1}._animate__tada_evhv6_271{animation:1.5s 20 _tada_evhv6_1}._animate__spin_evhv6_275{animation:1.618s linear 20 _spin_evhv6_1}@media (height<=1000px){._popupContainer_evhv6_200 iframe{max-height:85vh}}@media (width<=576px){._popupContainer_evhv6_200 iframe{max-height:70vh}._layoutDefault_evhv6_170,._layoutModal_evhv6_186{max-width:calc(100% - 40px)}}
+/*$vite$:1*/</style></head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Bright<span>Path</span></div>
+  <ul class="nav-links">
+    <li><a href="https://brightpath-lumi-atlas.netlify.app/#products">Our Products</a></li>
+    <li><a href="https://brightpath-lumi-atlas.netlify.app/#how-it-works">How It Works</a></li>
+    <li><a href="https://brightpath-lumi-atlas.netlify.app/#pricing">Pricing</a></li>
+    <li><a href="https://brightpath-lumi-atlas.netlify.app/#why">Why BrightPath</a></li>
+    <li><a href="https://brightpath-lumi-atlas.netlify.app/#assessment">Assessment Tool</a></li>
+    <li><a href="https://brightpath-lumi-atlas.netlify.app/#register" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">🇿🇦 Built for South African Learners</div>
+      <h1>Your child's personal AI tutor, available <em>24/7</em></h1>
+      <p class="hero-sub">Lumi is your school learner's personal AI voice tutor — personalised to their grade, subjects, and learning style. Atlas is coming soon for university and college students. No screens. No typing. Just learning.</p>
+      <div class="hero-buttons">
+        <a href="https://brightpath-lumi-atlas.netlify.app/#register" class="btn-primary">Start with Lumi →</a>
+        <a href="https://brightpath-lumi-atlas.netlify.app/#products" class="btn-secondary">Learn more</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <div class="avatar">L</div>
+          <div>
+            <div class="hero-card-name">Lumi is speaking...</div>
+            <div class="hero-card-sub">Afrikaans · Grade 10 · Riaan</div>
+          </div>
+          <div class="live-dot"></div>
+        </div>
+
+        <div class="waveform">
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+        </div>
+
+        <div class="session-message">
+          <p>"Goed gedoen, Riaan! Let's try that sentence again — this time focus on your vowel sounds. Wat dink jy?"</p>
+        </div>
+
+        <div class="session-report">
+          <div class="session-report-title">📋 Post-Session Report Sent</div>
+          <p>Session summary, engagement notes, and recommendations sent to parent at 16:42.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <p>Aligned to <strong>CAPS · IEB · Cambridge · SACAI</strong> · Available in <strong>English · Afrikaans</strong> · Sessions from <strong>R899/month</strong> · Intro session <strong>R149</strong></p>
+</div>
+
+<!-- FOUNDER MESSAGE -->
+<section class="founder-section">
+  <div class="founder-inner">
+    <div class="founder-avatar">R</div>
+    <div class="founder-message">
+      <p>Hi, I'm Rory — I built BrightPath because I'm a dad first, and an engineer second.</p>
+      <p>A few years ago I watched my own son sit in front of a textbook, stuck, with nobody around who could explain it to him the way he needed it explained. That feeling — of wanting to help your child and not quite knowing how — is what started all of this.</p>
+      <p>Lumi isn't trying to replace teachers or parents. It's trying to be the patient voice in the room at 8pm on a Tuesday, when homework isn't going well and everyone's tired. Every feature on this site — the reports that land in your inbox, the way Lumi remembers your child's curriculum and learning style, even the way we've built the assessment tool below — comes from asking "would this actually help a parent like me?"</p>
+      <p>Thank you for trusting us with your child's learning. I read every message that comes through this site personally.</p>
+    </div>
+    <div class="founder-signature">
+      Rory Lodewick
+      <span>Founder, BrightPath</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="container">
+    <div class="section-tag">Our Products</div>
+    <h2 class="section-title">One platform, two powerful learning companions</h2>
+    <p class="section-sub">Whether your child is in Grade 1 or their final year at university, BrightPath has a personalised AI companion built for them.</p>
+
+    <div class="intro-banner">
+      <span>👋 New here? Try Lumi first with a <strong>20-minute Intro Session — R149</strong></span>
+      <a href="https://brightpath-lumi-atlas.netlify.app/#register">Book Intro Session →</a>
+    </div>
+
+    <div class="products-grid">
+      <!-- LUMI -->
+      <div class="product-card">
+        <div class="product-card-top">
+          <div class="product-icon">🌟</div>
+          <h3>Lumi</h3>
+          <p>For school learners — Grade R through Grade 12</p>
+        </div>
+        <div class="product-card-body">
+          <ul class="product-features">
+            <li><span class="check">✓</span> Plans from R899/month — choose 1, 2, 3 or 5 sessions per week</li>
+            <li><span class="check">✓</span> Warm, encouraging voice tutor aligned to your child's exact curriculum</li>
+            <li><span class="check">✓</span> Personalised profile: subjects, special needs, home languages, interests</li>
+            <li><span class="check">✓</span> Textbook knowledge base — upload your child's books and Lumi can reference them</li>
+            <li><span class="check">✓</span> Automated session reports emailed to parent after every session</li>
+            <li><span class="check">✓</span> Session credit system with monthly tracking</li>
+            <li><span class="check">✓</span> Works on any smartphone — no app download needed</li>
+          </ul>
+          <a href="https://brightpath-lumi-atlas.netlify.app/#register" class="btn-primary" style="display:block;text-align:center;">Register for Lumi →</a>
+          <div class="product-badge">✅ Live Now</div>
+        </div>
+      </div>
+
+      <!-- ATLAS -->
+      <div class="product-card">
+        <div class="product-card-top atlas-top">
+          <div class="product-icon">🗺️</div>
+          <h3>Atlas</h3>
+          <p>For university, college and TVET students</p>
+        </div>
+        <div class="product-card-body">
+          <ul class="product-features">
+            <li><span class="check">✓</span> Peer-level AI study partner for tertiary-level content</li>
+            <li><span class="check">✓</span> Socratic approach — questions, challenges, and critical thinking</li>
+            <li><span class="check">✓</span> Module-specific knowledge base with past papers and study guides</li>
+            <li><span class="check">✓</span> Available for individual students, colleges, and corporate bursary programmes</li>
+            <li><span class="check">✓</span> Institutional licensing available for TVET and private colleges</li>
+            <li><span class="check">✓</span> Works on any device — no app download needed</li>
+          </ul>
+          <a href="https://brightpath-lumi-atlas.netlify.app/#register" class="btn-secondary" style="display:block;text-align:center;padding:12px;">Join the Atlas waitlist →</a>
+          <div class="product-badge">🔜 Coming Soon</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="section-tag">How It Works</div>
+    <h2 class="section-title">Up and running in minutes</h2>
+    <p class="section-sub">No installations. No complicated setup. Your child can be learning with Lumi today.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h4>Register online</h4>
+        <p>Fill in a short form about your child — their grade, subjects, curriculum, and a few personal details so Lumi can connect with them.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h4>Receive your link</h4>
+        <p>We email you a personal session link. No app to download. Works on any smartphone, tablet, or computer.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h4>Start learning</h4>
+        <p>Your child taps the link and starts talking to Lumi. Natural voice conversation — just like speaking to a tutor.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h4>You get a report</h4>
+        <p>After every session, you receive an email report covering what was discussed, engagement quality, and recommendations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">Simple, transparent pricing</h2>
+    <p class="section-sub">All plans include a personalised AI voice agent, post-session reports, and session credit tracking. No hidden fees. Cancel any time. Sessions are 30 minutes each.</p>
+
+    <div class="intro-banner">
+      <span>Not ready to commit? Start with a <strong>20-minute Intro Session — R149</strong></span>
+      <a href="https://brightpath-lumi-atlas.netlify.app/#register">Book Intro Session →</a>
+    </div>
+
+    <div class="pricing-toggle">
+      <span class="toggle-label active">Lumi — School</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:16px;">
+
+      <div class="price-card">
+        <h4>Light</h4>
+        <p class="price-desc">Great for occasional homework support</p>
+        <div class="price-amount">
+          <span class="amount">R899</span>
+          <span class="period">/month</span>
+        </div>
+        <div class="price-sessions">📚 4 sessions · 30 min each · 1×/week</div>
+        <ul class="price-features">
+          <li>Personalised voice agent</li>
+          <li>All subjects, any curriculum</li>
+          <li>Session reports to parent</li>
+          <li>Textbook upload support</li>
+        </ul>
+        <a href="https://brightpath-lumi-atlas.netlify.app/#register" class="price-cta price-cta-secondary">Get Started</a>
+      </div>
+
+      <div class="price-card">
+        <h4>Regular</h4>
+        <p class="price-desc">Steady support twice a week</p>
+        <div class="price-amount">
+          <span class="amount">R1,699</span>
+          <span class="period">/month</span>
+        </div>
+        <div class="price-sessions">📚 8 sessions · 30 min each · 2×/week</div>
+        <ul class="price-features">
+          <li>Personalised voice agent</li>
+          <li>All subjects, any curriculum</li>
+          <li>Session reports to parent</li>
+          <li>Textbook upload support</li>
+        </ul>
+        <a href="https://brightpath-lumi-atlas.netlify.app/#register" class="price-cta price-cta-secondary">Get Started</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="featured-tag">Most Popular</div>
+        <h4>Starter</h4>
+        <p class="price-desc">Perfect for consistent weekly learning</p>
+        <div class="price-amount">
+          <span class="amount">R2,499</span>
+          <span class="period">/month</span>
+        </div>
+        <div class="price-sessions">📚 12 sessions · 30 min each · 3×/week</div>
+        <ul class="price-features">
+          <li>Personalised voice agent</li>
+          <li>All subjects, any curriculum</li>
+          <li>Session reports to parent</li>
+          <li>Textbook upload support</li>
+          <li>Session credit management</li>
+        </ul>
+        <a href="https://brightpath-lumi-atlas.netlify.app/#register" class="price-cta price-cta-primary">Get Started</a>
+      </div>
+
+      <div class="price-card">
+        <h4>Standard</h4>
+        <p class="price-desc">For learners needing intensive daily support</p>
+        <div class="price-amount">
+          <span class="amount">R3,499</span>
+          <span class="period">/month</span>
+        </div>
+        <div class="price-sessions">📚 20 sessions · 30 min each · 5×/week</div>
+        <ul class="price-features">
+          <li>Everything in Starter</li>
+          <li>Daily sessions Mon–Fri</li>
+          <li>Multiple subjects</li>
+          <li>Detailed progress tracking</li>
+        </ul>
+        <a href="https://brightpath-lumi-atlas.netlify.app/#register" class="price-cta price-cta-secondary">Get Started</a>
+      </div>
+
+      <div class="price-card">
+        <h4>Homeschool</h4>
+        <p class="price-desc">Full-day homeschool learning companion</p>
+        <div class="price-amount">
+          <span class="amount">R7,999</span>
+          <span class="period">/month</span>
+        </div>
+        <div class="price-sessions">📚 60 sessions · 30 min each · 3×/day</div>
+        <ul class="price-features">
+          <li>Everything in Standard</li>
+          <li>Full-day learning support</li>
+          <li>All subjects covered</li>
+          <li>Custom curriculum alignment</li>
+        </ul>
+        <a href="https://brightpath-lumi-atlas.netlify.app/#register" class="price-cta price-cta-secondary">Get Started</a>
+      </div>
+
+    </div>
+
+    <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--mid-gray);">
+      Need even more sessions? We offer Homeschool Standard (R12,999 — 80 sessions) and Homeschool Premium (R16,999 — 120 sessions). <a href="mailto:roryvl85@gmail.com" style="color:var(--navy);font-weight:600;">Contact us.</a>
+    </p>
+  </div>
+</section>
+
+<!-- ASSESSMENT TOOL -->
+<section class="assessment-section" id="assessment">
+  <div class="container">
+    <div class="section-tag">New</div>
+    <h2 class="section-title">Not sure where to start? Get an Assessment</h2>
+    <p class="section-sub">Before committing to a package, get a clear picture of your child's current level, strengths, and gaps — delivered as a written report you can act on immediately.</p>
+
+    <div class="assessment-grid">
+      <div class="price-card">
+        <h4>Text Assessment</h4>
+        <p class="price-desc">A focused written assessment covering one subject</p>
+        <div class="price-amount">
+          <span class="amount">R299</span>
+          <span class="period">once-off</span>
+        </div>
+        <ul class="price-features">
+          <li>Curriculum-aligned diagnostic questions</li>
+          <li>Written strengths &amp; gaps report</li>
+          <li>Delivered to your email within 48 hours</li>
+        </ul>
+        <a href="#assessment-register" class="price-cta price-cta-secondary">Get Started</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="featured-tag">Full Bundle</div>
+        <h4>Full Bundle</h4>
+        <p class="price-desc">Multi-subject assessment plus a voice session with Lumi</p>
+        <div class="price-amount">
+          <span class="amount">R549</span>
+          <span class="period">once-off</span>
+        </div>
+        <ul class="price-features">
+          <li>Everything in Text Assessment</li>
+          <li>Multi-subject coverage</li>
+          <li>20-minute voice session with Lumi included</li>
+          <li>Personalised package recommendation</li>
+        </ul>
+        <a href="#assessment-register" class="price-cta price-cta-primary">Get Started</a>
+      </div>
+    </div>
+
+    <div class="assessment-designed">
+      <h4>How we designed it</h4>
+      <p>The assessment was built with the same curriculum-alignment logic that powers Lumi's tutoring sessions — CAPS, IEB, Cambridge and SACAI diagnostic questions, checked against real past-paper standards, so the report reflects where your child genuinely stands, not a generic quiz score.</p>
+    </div>
+
+    <div class="assessment-disclaimer">
+      <strong>Please note:</strong> The BrightPath Assessment Tool is a diagnostic and educational planning aid, not a formal psychometric or psychoeducational evaluation. It is designed to help guide subject and package choices and does not replace a qualified educational psychologist's assessment where one is needed.
+    </div>
+
+    <div class="tally-embed" id="assessment-register">
+      <p style="color:#2D2D2D;">Register for your assessment below — you'll receive your questions and instructions by email shortly after.</p>
+      <iframe data-tally-src="https://tally.so/embed/QKWBWG?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" title="Register for Assessment">
+      </iframe>
+      <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+    </div>
+  </div>
+</section>
+
+<!-- WHY BRIGHTPATH -->
+<section id="why">
+  <div class="container">
+    <div class="section-tag">Why BrightPath</div>
+    <h2 class="section-title">How does Lumi compare?</h2>
+    <p class="section-sub">Lumi is the only voice AI tutor built specifically for South African learners — with full curriculum alignment, personalised profiles, and parent reporting.</p>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th class="lumi-col">Lumi (BrightPath)</th>
+          <th>Human Tutor</th>
+          <th>Khanmigo</th>
+          <th>Tutoring Centre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Voice-based (no typing)</td>
+          <td class="yes lumi-col">✓ Yes</td>
+          <td class="yes">✓ Yes</td>
+          <td class="no">✗ No</td>
+          <td class="yes">✓ Yes</td>
+        </tr>
+        <tr>
+          <td>SA Curriculum (CAPS/IEB)</td>
+          <td class="yes lumi-col">✓ Yes</td>
+          <td class="yes">✓ Yes</td>
+          <td class="no">✗ No (US only)</td>
+          <td>Partial</td>
+        </tr>
+        <tr>
+          <td>Available 24/7</td>
+          <td class="yes lumi-col">✓ Yes</td>
+          <td class="no">✗ No</td>
+          <td class="yes">✓ Yes</td>
+          <td class="no">✗ No</td>
+        </tr>
+        <tr>
+          <td>Fully personalised profile</td>
+          <td class="yes lumi-col">✓ Yes</td>
+          <td class="yes">✓ Yes</td>
+          <td>Partial</td>
+          <td class="no">✗ No</td>
+        </tr>
+        <tr>
+          <td>Post-session parent reports</td>
+          <td class="yes lumi-col">✓ Automated</td>
+          <td>Sometimes</td>
+          <td class="no">✗ No</td>
+          <td class="no">✗ No</td>
+        </tr>
+        <tr>
+          <td>Textbook knowledge base</td>
+          <td class="yes lumi-col">✓ Yes</td>
+          <td class="yes">✓ Yes</td>
+          <td class="no">✗ No</td>
+          <td class="no">✗ No</td>
+        </tr>
+        <tr>
+          <td>Special needs support</td>
+          <td class="yes lumi-col">✓ Yes</td>
+          <td>Varies</td>
+          <td class="no">✗ No</td>
+          <td>Varies</td>
+        </tr>
+        <tr>
+          <td>Monthly cost (approx)</td>
+          <td class="lumi-col" style="font-weight:700;">From R899</td>
+          <td>R1,800–R3,200</td>
+          <td>R73</td>
+          <td>R400–R800</td>
+        </tr>
+        <tr>
+          <td>Upfront skills assessment</td>
+          <td class="yes lumi-col">✓ From R299</td>
+          <td class="no">✗ No</td>
+          <td class="no">✗ No</td>
+          <td>Varies</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonial-section">
+  <div class="container">
+    <div class="section-tag">Early Feedback</div>
+    <h2 class="section-title">What parents are saying</h2>
+
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p>Lumi knew exactly what Riaan was working on in Afrikaans and kept him engaged the whole session. The session report that arrived in my email afterwards was so detailed — I felt like I was there.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">R</div>
+          <div>
+            <div class="author-name">Riaan's Mom</div>
+            <div class="author-role">KwaZulu-Natal · Homeschool parent · Grade 10</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p>I was amazed — I asked Lumi about a section from the Afrikaans textbook and it knew the content perfectly. My daughter said it felt like talking to a real teacher, not a computer.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div>
+            <div class="author-name">Homeschool Parent</div>
+            <div class="author-role">Western Cape · IEB curriculum · Grade 9</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section class="register" id="register">
+  <div class="register-inner">
+    <div class="section-tag">Get Started</div>
+    <h2 class="section-title">Ready to transform how your child learns?</h2>
+    <p class="section-sub">Register your child for Lumi today, or join the Atlas waitlist for university students. Sessions are available immediately after registration.</p>
+
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('lumi')">🌟 Lumi — School</button>
+      <button class="tab" onclick="showTab('atlas')">🗺️ Atlas — Tertiary</button>
+    </div>
+
+    <div id="lumi-tab" class="tab-content active">
+      <div class="tally-embed">
+        <p style="color:#2D2D2D;">Fill in the registration form below. Your child's personalised Lumi agent will be created automatically and a welcome email with your session link will arrive within minutes.</p>
+        <iframe data-tally-src="https://tally.so/embed/ZjD5ze?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" title="Register for Lumi">
+        </iframe>
+        <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+      </div>
+    </div>
+
+    <div id="atlas-tab" class="tab-content">
+      <div class="atlas-coming">
+        <h3>Atlas is coming soon</h3>
+        <p>We're building Atlas for university, college and TVET students. Leave your email and we'll notify you the moment it's ready — including early access pricing.</p>
+        <div class="notify-form">
+          <input type="email" placeholder="your@email.com" id="atlas-email">
+          <button onclick="notifyAtlas()">Notify Me</button>
+        </div>
+        <p style="margin-top:16px;font-size:12px;opacity:0.5;">Or email us directly at roryvl85@gmail.com</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">Bright<span>Path</span></div>
+        <p>AI-powered voice tutoring for South African learners. Lumi for school students (Grade R–12) from R899/month. Atlas for university and college students — coming soon.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Products</h5>
+        <ul>
+          <li><a href="https://brightpath-lumi-atlas.netlify.app/#products">Lumi — School</a></li>
+          <li><a href="https://brightpath-lumi-atlas.netlify.app/#products">Atlas — Tertiary</a></li>
+          <li><a href="https://brightpath-lumi-atlas.netlify.app/#assessment">Assessment Tool</a></li>
+          <li><a href="https://brightpath-lumi-atlas.netlify.app/#pricing">Pricing</a></li>
+          <li><a href="https://brightpath-lumi-atlas.netlify.app/#how-it-works">How It Works</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:roryvl85@gmail.com">roryvl85@gmail.com</a></li>
+          <li><a href="https://brightpath-lumi-atlas.netlify.app/#register">Register Now</a></li>
+          <li><a href="mailto:roryvl85@gmail.com">Session Credits</a></li>
+          <li><a href="mailto:roryvl85@gmail.com">Institutional Enquiries</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 BrightPath. All rights reserved.</p>
+      <p><a href="mailto:roryvl85@gmail.com">Privacy Policy</a> · <a href="mailto:roryvl85@gmail.com">Terms of Service</a> · Built in South Africa 🇿🇦</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+function showTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById(tab + '-tab').classList.add('active');
+  event.target.classList.add('active');
+}
+
+function notifyAtlas() {
+  const email = document.getElementById('atlas-email').value;
+  if (email && email.includes('@')) {
+    alert('Thank you! We\'ll notify you at ' + email + ' when Atlas launches.');
+    document.getElementById('atlas-email').value = '';
+  } else {
+    alert('Please enter a valid email address.');
+  }
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+
+
+</body></html>
