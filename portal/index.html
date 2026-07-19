@@ -1,0 +1,372 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrightPath Parent Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0F2A5E;
+    --navy-mid: #1A4A8A;
+    --gold: #C9972A;
+    --gold-light: #F0C84A;
+    --bg: #F7F9FC;
+    --bg-alt: #E8F0FB;
+    --text: #2D2D2D;
+    --gray-mid: #6B7280;
+    --gray-light: #E5E7EB;
+    --green: #1E8E5A;
+    --amber: #B8860B;
+    --red: #C0392B;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--navy); margin: 0; }
+  a { color: var(--navy-mid); }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 24px 16px 64px; }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 0;
+    margin-bottom: 24px;
+  }
+  .topbar .logo { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; color: var(--navy); }
+  .topbar .logo span { color: var(--gold); }
+
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(15, 42, 94, 0.08), 0 1px 2px rgba(15, 42, 94, 0.06);
+  }
+
+  .header-card {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    margin-bottom: 20px;
+  }
+  .header-card h1 { color: #fff; font-size: 26px; }
+  .header-card .sub { color: rgba(255,255,255,0.85); font-size: 14px; margin-top: 6px; }
+  .header-card .meta { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .section-title { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-mid); font-weight: 600; margin-bottom: 12px; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .badge.good { background: #E4F4EC; color: var(--green); }
+  .badge.warn { background: #FBF0DB; color: var(--amber); }
+  .badge.full { background: #FBE7E4; color: var(--red); }
+
+  .progress-row { display: flex; justify-content: space-between; align-items: baseline; margin: 16px 0 8px; }
+  .progress-row .count { font-size: 28px; font-weight: 700; color: var(--navy); font-family: 'Playfair Display', serif; }
+  .progress-row .count span { font-size: 15px; font-weight: 500; color: var(--gray-mid); font-family: 'Inter', sans-serif; }
+  .progress-track { height: 10px; background: var(--gray-light); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%); border-radius: 999px; transition: width 0.4s ease; }
+  .progress-fill.warn { background: linear-gradient(90deg, #D99A2B 0%, #E8B84B 100%); }
+  .progress-fill.full { background: linear-gradient(90deg, #C0392B 0%, #D9584A 100%); }
+  .progress-meta { display: flex; justify-content: space-between; font-size: 13px; color: var(--gray-mid); margin-top: 8px; }
+
+  .alert { border-radius: 12px; padding: 14px 16px; font-size: 14px; margin-top: 16px; display: flex; gap: 10px; }
+  .alert.amber { background: #FBF0DB; color: #7A5B0B; border: 1px solid #EEDBA6; }
+  .alert.red { background: #FBE7E4; color: #8C2A1E; border: 1px solid #F0C2BA; }
+
+  .package-row { display: flex; justify-content: space-between; align-items: center; }
+  .package-name { font-size: 17px; font-weight: 700; color: var(--navy); }
+  .package-detail { font-size: 13px; color: var(--gray-mid); margin-top: 2px; }
+  .package-price { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--gold); }
+
+  .report-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gray-light);
+    cursor: pointer;
+  }
+  .report-item:last-child { border-bottom: none; }
+  .report-item .rdate { font-size: 12px; color: var(--gray-mid); }
+  .report-item .rtitle { font-weight: 600; font-size: 15px; color: var(--text); margin-top: 2px; }
+  .report-item .rsummary { font-size: 13px; color: var(--gray-mid); margin-top: 2px; }
+  .report-item .chevron { color: var(--gold); font-size: 20px; margin-left: 12px; }
+  .empty-note { font-size: 14px; color: var(--gray-mid); font-style: italic; }
+
+  .action-row { display: flex; gap: 12px; margin-top: 4px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+  }
+  .btn.primary { background: var(--gold); color: #fff; }
+  .btn.outline { background: #fff; color: var(--navy); border: 1px solid var(--gray-light); }
+
+  .footer-note { text-align: center; font-size: 12px; color: var(--gray-mid); margin-top: 28px; }
+  .footer-note a { color: var(--gray-mid); }
+
+  .modal-backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(15, 42, 94, 0.45);
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 16px;
+    z-index: 50;
+    overflow-y: auto;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 16px;
+    max-width: 560px;
+    width: 100%;
+    padding: 28px;
+  }
+  .modal-close {
+    float: right;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--gray-mid);
+    cursor: pointer;
+    line-height: 1;
+  }
+  .modal h3 { color: var(--navy); font-size: 20px; margin-bottom: 4px; }
+  .modal .modal-date { font-size: 13px; color: var(--gray-mid); margin-bottom: 16px; }
+  .modal-body h3 { font-size: 15px; margin-top: 18px; margin-bottom: 6px; }
+  .modal-body p { font-size: 14px; color: var(--text); margin: 0 0 4px; }
+
+  .state-screen { text-align: center; padding: 80px 20px; }
+  .state-screen h2 { font-size: 20px; margin-bottom: 8px; }
+  .state-screen p { color: var(--gray-mid); font-size: 14px; }
+
+  @media (max-width: 480px) {
+    .package-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .action-row { flex-direction: column; }
+    .btn { width: 100%; }
+  }
+</style>
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="logo">Bright<span>Path</span></div>
+  </div>
+  <div id="app"></div>
+</div>
+
+<div class="modal-backdrop" id="reportModal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+    <h3 id="modalTitle"></h3>
+    <div class="modal-date" id="modalDate"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  // ---- Live data endpoint (n8n → Notion) ----
+  var LIVE_ENDPOINT = 'https://rorylodewick.app.n8n.cloud/webhook/portal-session';
+  var LIVE_TIMEOUT_MS = 5000;
+
+  // ---- Fallback data. No students currently active. Add an entry here
+  // once the next real registration comes through the payment-gate flow. ----
+  var STUDENTS = {};
+
+  function qs(name) {
+    var params = new URLSearchParams(window.location.search);
+    return params.get(name);
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str == null ? '' : String(str);
+    return div.innerHTML;
+  }
+
+  function fetchLiveCounts(id) {
+    var controller = new AbortController();
+    var timer = setTimeout(function () { controller.abort(); }, LIVE_TIMEOUT_MS);
+    return fetch(LIVE_ENDPOINT + '?id=' + encodeURIComponent(id), { signal: controller.signal })
+      .then(function (res) {
+        clearTimeout(timer);
+        if (!res.ok) return null;
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data || !data.found) return null;
+        if (typeof data.sessionsUsed !== 'number' || typeof data.sessionsLimit !== 'number') return null;
+        return data;
+      })
+      .catch(function () {
+        clearTimeout(timer);
+        return null;
+      });
+  }
+
+  function renderNotFound() {
+    document.getElementById('app').innerHTML =
+      '<div class="card state-screen">' +
+      '<h2>We couldn’t find that link</h2>' +
+      '<p>Please check the portal link in your welcome email, or get in touch through our registration form and we’ll help you out.</p>' +
+      '<div class="action-row" style="justify-content:center;margin-top:20px;">' +
+      '<a class="btn primary" href="https://brightpath-lumi-atlas.netlify.app/#register" target="_blank" rel="noopener">Contact us</a>' +
+      '</div></div>';
+  }
+
+  function statusInfo(used, total) {
+    var pct = total > 0 ? (used / total) * 100 : 0;
+    if (used >= total) return { label: 'All sessions used', cls: 'full' };
+    if (pct >= 75) return { label: 'Running low', cls: 'warn' };
+    return { label: 'Sessions available', cls: 'good' };
+  }
+
+  function renderPortal(student) {
+    var used = student.sessionsUsed;
+    var total = student.sessionsPerMonth;
+    var remaining = Math.max(total - used, 0);
+    var pct = total > 0 ? Math.min((used / total) * 100, 100) : 0;
+    var status = statusInfo(used, total);
+
+    var warning = '';
+    if (used >= total) {
+      warning = '<div class="alert red">⚠️ All ' + total + ' sessions for this month have been used. Sessions reset on ' + escapeHtml(student.monthResets) + '.</div>';
+    } else if (pct >= 75) {
+      warning = '<div class="alert amber">⚠️ ' + remaining + ' session' + (remaining === 1 ? '' : 's') + ' left this month — running low.</div>';
+    }
+
+    var reportsHtml;
+    if (!student.reports || student.reports.length === 0) {
+      reportsHtml = '<div class="empty-note">No session reports yet — check back after the next session.</div>';
+    } else {
+      reportsHtml = student.reports.map(function (r, i) {
+        return '<div class="report-item" data-report-index="' + i + '">' +
+          '<div><div class="rdate">' + escapeHtml(r.date) + '</div>' +
+          '<div class="rtitle">' + escapeHtml(r.title) + '</div>' +
+          '<div class="rsummary">' + escapeHtml(r.summary) + '</div></div>' +
+          '<div class="chevron">›</div></div>';
+      }).join('');
+    }
+
+    document.getElementById('app').innerHTML =
+      '<div class="header-card">' +
+        '<h1>Hi, welcome back!</h1>' +
+        '<div class="sub">' + escapeHtml(student.preferredName) + '’s Lumi learning portal</div>' +
+        '<div class="meta">' +
+          '<span class="pill">' + escapeHtml(student.grade) + '</span>' +
+          '<span class="pill">' + escapeHtml(student.curriculum) + '</span>' +
+          '<span class="pill">' + escapeHtml(student.subjects) + '</span>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="card">' +
+        '<div class="section-title">Session usage</div>' +
+        '<span class="badge ' + status.cls + '">' + status.label + '</span>' +
+        '<div class="progress-row">' +
+          '<div class="count">' + used + ' <span>/ ' + total + ' sessions used</span></div>' +
+        '</div>' +
+        '<div class="progress-track"><div class="progress-fill ' + (status.cls === 'good' ? '' : status.cls) + '" style="width:' + pct + '%"></div></div>' +
+        '<div class="progress-meta"><span>' + remaining + ' left this month</span><span>Resets ' + escapeHtml(student.monthResets) + '</span></div>' +
+        warning +
+      '</div>' +
+
+      '<div class="card">' +
+        '<div class="section-title">Current package</div>' +
+        '<div class="package-row">' +
+          '<div><div class="package-name">' + escapeHtml(student.package) + '</div>' +
+          '<div class="package-detail">' + total + ' sessions / month</div></div>' +
+          '<div class="package-price">' + escapeHtml(student.price) + '/mo</div>' +
+        '</div>' +
+        '<div class="action-row" style="margin-top:18px;">' +
+          '<a class="btn primary" href="' + escapeHtml(student.sessionLink) + '" target="_blank" rel="noopener">Start a Lumi session</a>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="card">' +
+        '<div class="section-title">Session reports</div>' +
+        reportsHtml +
+      '</div>' +
+
+      '<div class="card">' +
+        '<div class="section-title">Need something?</div>' +
+        '<div class="action-row">' +
+          '<a class="btn outline" href="https://brightpath-lumi-atlas.netlify.app/#register" target="_blank" rel="noopener">Request a credit</a>' +
+          '<a class="btn outline" href="https://brightpath-lumi-atlas.netlify.app/#register" target="_blank" rel="noopener">Contact us</a>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="footer-note">BrightPath · Lumi</div>';
+
+    if (student.reports && student.reports.length > 0) {
+      document.querySelectorAll('.report-item').forEach(function (el) {
+        el.addEventListener('click', function () {
+          var idx = parseInt(el.getAttribute('data-report-index'), 10);
+          openReportModal(student.reports[idx]);
+        });
+      });
+    }
+  }
+
+  function openReportModal(report) {
+    document.getElementById('modalTitle').textContent = report.title;
+    document.getElementById('modalDate').textContent = report.date;
+    document.getElementById('modalBody').innerHTML = report.body;
+    document.getElementById('reportModal').classList.add('open');
+  }
+
+  document.getElementById('modalClose').addEventListener('click', function () {
+    document.getElementById('reportModal').classList.remove('open');
+  });
+  document.getElementById('reportModal').addEventListener('click', function (e) {
+    if (e.target === this) this.classList.remove('open');
+  });
+
+  // ---- Boot ----
+  var id = qs('id');
+  var fallback = id ? STUDENTS[id] : null;
+
+  if (!fallback) {
+    renderNotFound();
+    return;
+  }
+
+  fetchLiveCounts(id).then(function (live) {
+    var student = Object.assign({}, fallback);
+    if (live) {
+      student.sessionsUsed = live.sessionsUsed;
+      student.sessionsPerMonth = live.sessionsLimit;
+    }
+    renderPortal(student);
+  });
+})();
+</script>
