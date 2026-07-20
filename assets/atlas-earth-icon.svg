@@ -1,0 +1,43 @@
+<svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="oceanGrad" cx="38%" cy="32%" r="80%">
+      <stop offset="0%" stop-color="#1A4A8A"/>
+      <stop offset="100%" stop-color="#0F2A5E"/>
+    </radialGradient>
+    <linearGradient id="landGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0C84A"/>
+      <stop offset="100%" stop-color="#C9972A"/>
+    </linearGradient>
+    <linearGradient id="rimGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0C84A"/>
+      <stop offset="100%" stop-color="#C9972A"/>
+    </linearGradient>
+    <clipPath id="globeClip">
+      <circle cx="80" cy="80" r="70"/>
+    </clipPath>
+  </defs>
+  <circle cx="80" cy="80" r="72" fill="none" stroke="url(#rimGrad)" stroke-width="2"/>
+  <circle cx="80" cy="80" r="70" fill="url(#oceanGrad)"/>
+  <g clip-path="url(#globeClip)">
+    <ellipse cx="80" cy="14" rx="46" ry="16" fill="#F7F9FC" opacity="0.85"/>
+    <ellipse cx="80" cy="150" rx="40" ry="14" fill="#F7F9FC" opacity="0.8"/>
+    <path d="M42 58 C 48 52, 58 52, 62 58 C 66 64, 64 72, 60 78 C 58 84, 60 90, 56 98 C 53 106, 48 112, 44 108 C 40 102, 42 94, 40 86 C 38 78, 34 70, 38 64 C 39 62, 40 60, 42 58 Z" fill="url(#landGrad)"/>
+    <path d="M78 30 C 82 26, 90 26, 94 30 C 98 33, 96 38, 92 40 C 88 42, 82 41, 79 38 C 76 35, 75 33, 78 30 Z" fill="url(#landGrad)"/>
+    <path d="M88 42 C 96 40, 106 42, 112 48 C 118 54, 120 62, 116 68 C 113 73, 114 79, 111 85 C 108 92, 109 99, 104 106 C 100 112, 96 118, 92 114 C 89 111, 91 105, 88 99 C 85 93, 82 88, 84 81 C 86 74, 83 68, 85 61 C 86 54, 84 47, 88 42 Z" fill="url(#landGrad)"/>
+    <ellipse cx="118" cy="92" rx="3.5" ry="8" fill="url(#landGrad)" transform="rotate(15 118 92)"/>
+    <path d="M88 42 C96 40,106 42,112 48 C118 54,120 62,116 68 C113 73,114 79,111 85 C108 92,109 99,104 106 C100 112,96 118,92 114 C89 111,91 105,88 99 C85 93,82 88,84 81 C86 74,83 68,85 61 C86 54,84 47,88 42 Z" fill="#0F2A5E" opacity="0.08"/>
+    <ellipse cx="80" cy="80" rx="70" ry="24" fill="none" stroke="#F7F9FC" stroke-width="0.7" opacity="0.2"/>
+    <ellipse cx="80" cy="80" rx="40" ry="70" fill="none" stroke="#F7F9FC" stroke-width="0.7" opacity="0.18"/>
+    <ellipse cx="50" cy="40" rx="14" ry="4" fill="#F7F9FC" opacity="0.18"/>
+    <ellipse cx="105" cy="115" rx="16" ry="4" fill="#F7F9FC" opacity="0.15"/>
+  </g>
+  <path d="M 58,76 Q 62,70 66,70 Q 70,70 74,76 Q 70,80.5 66,80.5 Q 62,80.5 58,76 Z" fill="#F7F9FC"/>
+  <circle cx="66" cy="76" r="3.4" fill="#1A4A8A"/>
+  <circle cx="67.1" cy="74.9" r="0.9" fill="#F7F9FC" opacity="0.9"/>
+  <path d="M 57,75.3 Q 66,68.5 75,75.3" stroke="#0F2A5E" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.35"/>
+  <path d="M 86,76 Q 90,70 94,70 Q 98,70 102,76 Q 98,80.5 94,80.5 Q 90,80.5 86,76 Z" fill="#F7F9FC"/>
+  <circle cx="94" cy="76" r="3.4" fill="#1A4A8A"/>
+  <circle cx="95.1" cy="74.9" r="0.9" fill="#F7F9FC" opacity="0.9"/>
+  <path d="M 85,75.3 Q 94,68.5 103,75.3" stroke="#0F2A5E" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.35"/>
+  <path d="M 63,95 C 71,101.5 89,101.5 97,95" stroke="#F7F9FC" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+</svg>
