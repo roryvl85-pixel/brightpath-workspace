@@ -195,12 +195,12 @@
 
 <script>
 (function () {
-  // ---- Live data endpoint (n8n → Notion) ----
+  // ---- Live data endpoint (n8n → Notion, checks both Lumi and Atlas) ----
   var LIVE_ENDPOINT = 'https://rorylodewick.app.n8n.cloud/webhook/portal-session';
   var LIVE_TIMEOUT_MS = 5000;
 
-  // ---- Fallback data. No students currently active. Add an entry here
-  // once the next real registration comes through the payment-gate flow. ----
+  // ---- Local override data, for test profiles only. Real students are always
+  // looked up live — this is never required for a real student to see their portal. ----
   var STUDENTS = {};
 
   function qs(name) {
@@ -214,7 +214,7 @@
     return div.innerHTML;
   }
 
-  function fetchLiveCounts(id) {
+  function fetchLive(id) {
     var controller = new AbortController();
     var timer = setTimeout(function () { controller.abort(); }, LIVE_TIMEOUT_MS);
     return fetch(LIVE_ENDPOINT + '?id=' + encodeURIComponent(id), { signal: controller.signal })
@@ -232,6 +232,30 @@
         clearTimeout(timer);
         return null;
       });
+  }
+
+  function nextResetDate() {
+    var now = new Date();
+    var next = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+    return next.toLocaleDateString('en-ZA', { day: 'numeric', month: 'long' });
+  }
+
+  function normalizeLive(live) {
+    var isAtlas = live.product === 'Atlas';
+    var meta = isAtlas
+      ? [live.institution, live.course, live.yearOfStudy, live.modules].filter(Boolean)
+      : [live.grade, live.curriculum, live.subjects].filter(Boolean);
+    return {
+      product: isAtlas ? 'Atlas' : 'Lumi',
+      name: live.name || 'there',
+      sessionsUsed: live.sessionsUsed,
+      sessionsPerMonth: live.sessionsLimit,
+      package: live.package || '',
+      meta: meta,
+      sessionLink: live.agentId ? ('https://elevenlabs.io/app/talk-to?agent_id=' + live.agentId) : '',
+      monthResets: nextResetDate(),
+      reports: []
+    };
   }
 
   function renderNotFound() {
@@ -252,6 +276,7 @@
   }
 
   function renderPortal(student) {
+    var isAtlas = student.product === 'Atlas';
     var used = student.sessionsUsed;
     var total = student.sessionsPerMonth;
     var remaining = Math.max(total - used, 0);
@@ -278,15 +303,15 @@
       }).join('');
     }
 
+    var metaHtml = student.meta.map(function (m) {
+      return '<span class="pill">' + escapeHtml(m) + '</span>';
+    }).join('');
+
     document.getElementById('app').innerHTML =
       '<div class="header-card">' +
         '<h1>Hi, welcome back!</h1>' +
-        '<div class="sub">' + escapeHtml(student.preferredName) + '’s Lumi learning portal</div>' +
-        '<div class="meta">' +
-          '<span class="pill">' + escapeHtml(student.grade) + '</span>' +
-          '<span class="pill">' + escapeHtml(student.curriculum) + '</span>' +
-          '<span class="pill">' + escapeHtml(student.subjects) + '</span>' +
-        '</div>' +
+        '<div class="sub">' + escapeHtml(student.name) + '’s ' + (isAtlas ? 'Atlas' : 'Lumi') + ' learning portal</div>' +
+        '<div class="meta">' + metaHtml + '</div>' +
       '</div>' +
 
       '<div class="card">' +
@@ -305,10 +330,9 @@
         '<div class="package-row">' +
           '<div><div class="package-name">' + escapeHtml(student.package) + '</div>' +
           '<div class="package-detail">' + total + ' sessions / month</div></div>' +
-          '<div class="package-price">' + escapeHtml(student.price) + '/mo</div>' +
         '</div>' +
         '<div class="action-row" style="margin-top:18px;">' +
-          '<a class="btn primary" href="' + escapeHtml(student.sessionLink) + '" target="_blank" rel="noopener">Start a Lumi session</a>' +
+          '<a class="btn primary" href="' + escapeHtml(student.sessionLink) + '" target="_blank" rel="noopener">Start ' + (isAtlas ? 'an Atlas' : 'a Lumi') + ' session</a>' +
         '</div>' +
       '</div>' +
 
@@ -325,7 +349,7 @@
         '</div>' +
       '</div>' +
 
-      '<div class="footer-note">BrightPath · Lumi</div>';
+      '<div class="footer-note">BrightPath · ' + (isAtlas ? 'Atlas' : 'Lumi') + '</div>';
 
     if (student.reports && student.reports.length > 0) {
       document.querySelectorAll('.report-item').forEach(function (el) {
@@ -352,21 +376,27 @@
   });
 
   // ---- Boot ----
+  // Live Notion lookup is the source of truth for every real student — it is never
+  // gated behind a local fallback entry. STUDENTS is only consulted if the live
+  // lookup finds nothing, so test profiles can still be added there by hand.
   var id = qs('id');
-  var fallback = id ? STUDENTS[id] : null;
 
-  if (!fallback) {
+  if (!id) {
     renderNotFound();
     return;
   }
 
-  fetchLiveCounts(id).then(function (live) {
-    var student = Object.assign({}, fallback);
+  fetchLive(id).then(function (live) {
     if (live) {
-      student.sessionsUsed = live.sessionsUsed;
-      student.sessionsPerMonth = live.sessionsLimit;
+      renderPortal(normalizeLive(live));
+      return;
     }
-    renderPortal(student);
+    var fallback = STUDENTS[id];
+    if (fallback) {
+      renderPortal(fallback);
+      return;
+    }
+    renderNotFound();
   });
 })();
 </script>
