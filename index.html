@@ -3,161 +3,516 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Signal & Script — Business Systems Assessment</title>
-<meta name="description" content="Signal & Script assesses how your business systems actually run, then builds the right fix.">
-<link rel="stylesheet" href="styles.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✍️</text></svg>">
+<title>Signal & Script — Stop firefighting. Start running on systems.</title>
+<meta name="description" content="Signal & Script maps how your business actually runs, then fixes the one process quietly costing you the most time — with a written standard, automation, or both. R350 flat-fee assessment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B1F2A;
+    --ink-soft:#3A4152;
+    --teal:#2F6F6B;
+    --teal-deep:#234f4c;
+    --gold:#C9A227;
+    --paper:#EDE8DD;
+    --paper-card:#F7F4EC;
+    --white:#FFFDF8;
+    --line:rgba(27,31,42,0.12);
+    --shadow: 0 1px 2px rgba(27,31,42,0.06), 0 8px 24px rgba(27,31,42,0.06);
+    --radius: 14px;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;} }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  .wrap-narrow{max-width:800px;margin:0 auto;padding:0 24px;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--teal-deep);
+    font-weight:500;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:0 0 16px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px;height:7px;border-radius:50%;
+    background:var(--gold);
+    flex:none;
+  }
+
+  h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-0.01em;margin:0;color:var(--ink);}
+  h2{font-size:clamp(28px,4vw,40px);line-height:1.12;}
+  h3{font-size:20px;line-height:1.3;}
+  p{margin:0;}
+
+  /* ---------- NAV ---------- */
+  header.site{
+    position:sticky;top:0;z-index:40;
+    background:rgba(237,232,221,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1120px;margin:0 auto;}
+  .logo{display:flex;align-items:center;gap:9px;font-family:var(--serif);font-weight:600;font-size:19px;text-decoration:none;color:var(--ink);}
+  .logo .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+  nav.links{display:flex;gap:28px;align-items:center;}
+  nav.links a{font-size:14.5px;font-weight:500;text-decoration:none;color:var(--ink-soft);}
+  nav.links a:hover{color:var(--teal-deep);}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--teal);color:var(--white);
+    font-family:var(--sans);font-weight:600;font-size:14.5px;
+    padding:12px 22px;border-radius:999px;text-decoration:none;
+    border:1px solid var(--teal);
+    transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{background:var(--teal-deep);transform:translateY(-1px);box-shadow:0 6px 16px rgba(47,111,107,0.25);}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line);}
+  .btn-ghost:hover{background:var(--white);border-color:var(--ink);transform:none;box-shadow:none;}
+  .btn-sm{padding:9px 16px;font-size:13.5px;}
+  @media (max-width:760px){ nav.links a.hide-mobile{display:none;} }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:76px 0 60px;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;gap:40px;} }
+  .hero h1{font-size:clamp(34px,5.4vw,58px);line-height:1.05;}
+  .hero h1 em{font-style:normal;color:var(--teal-deep);}
+  .hero .sub{margin-top:20px;font-size:18.5px;line-height:1.55;color:var(--ink-soft);max-width:52ch;}
+  .hero .cta-row{margin-top:32px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+  .hero .fine{margin-top:14px;font-size:13.5px;color:var(--ink-soft);font-family:var(--mono);}
+
+  .signal-art{
+    background:var(--ink);
+    border-radius:20px;
+    padding:36px 30px;
+    position:relative;
+    overflow:hidden;
+  }
+  .signal-art svg{width:100%;height:auto;}
+  .signal-caption{
+    font-family:var(--mono);font-size:12px;color:rgba(237,232,221,0.55);
+    display:flex;justify-content:space-between;margin-top:18px;letter-spacing:0.04em;
+  }
+  .signal-caption span:last-child{color:var(--gold);}
+
+  .draw-path{
+    stroke-dasharray:900;
+    stroke-dashoffset:900;
+    animation:draw 2.2s ease-out forwards 0.3s;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  .pulse-dot{
+    animation:pulse 2.4s ease-in-out infinite;
+    transform-origin:center;
+  }
+  @keyframes pulse{ 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.55;transform:scale(1.4);} }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:64px 0;}
+  .section-head{max-width:640px;margin:0 0 40px;}
+  .section-head p.lede{margin-top:14px;font-size:16.5px;color:var(--ink-soft);}
+  .divider{height:1px;background:var(--line);}
+
+  /* ---------- FIGHT MODE CARDS ---------- */
+  .band-dark{background:var(--ink);color:var(--paper);}
+  .band-dark .eyebrow{color:var(--gold);}
+  .band-dark .eyebrow::before{background:var(--gold);}
+  .band-dark h2{color:var(--white);}
+  .band-dark .section-head p.lede{color:rgba(237,232,221,0.72);}
+
+  .card-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:860px){ .card-grid-3{grid-template-columns:1fr;} }
+
+  .pain-card{
+    background:rgba(237,232,221,0.06);
+    border:1px solid rgba(237,232,221,0.14);
+    border-radius:var(--radius);
+    padding:26px 24px;
+  }
+  .pain-card .num{font-family:var(--mono);color:var(--gold);font-size:13px;letter-spacing:0.08em;}
+  .pain-card h3{color:var(--white);margin-top:12px;}
+  .pain-card p{margin-top:10px;font-size:15px;color:rgba(237,232,221,0.75);line-height:1.55;}
+
+  /* ---------- OUTCOME STAT CARDS ---------- */
+  .card-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  @media (max-width:900px){ .card-grid-4{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .card-grid-4{grid-template-columns:1fr;} }
+
+  .stat-card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px 20px;
+  }
+  .stat-card .glyph{font-family:var(--serif);font-size:30px;color:var(--teal-deep);line-height:1;}
+  .stat-card h3{margin-top:14px;font-size:17px;}
+  .stat-card p{margin-top:8px;font-size:14.5px;color:var(--ink-soft);}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);}
+  @media (max-width:860px){ .steps{grid-template-columns:1fr;} }
+  .step{padding:30px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .step:last-child{border-right:none;}
+  .step .step-num{font-family:var(--mono);font-size:13px;color:var(--gold);background:var(--ink);display:inline-block;padding:3px 9px;border-radius:5px;letter-spacing:0.06em;}
+  .step h3{margin-top:16px;}
+  .step p{margin-top:10px;font-size:15px;color:var(--ink-soft);}
+
+  /* ---------- SERVICES ---------- */
+  .service-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px 26px;
+    display:flex;flex-direction:column;
+    box-shadow:var(--shadow);
+  }
+  .service-card.featured{border-color:var(--teal);background:linear-gradient(180deg,#fff 0%,var(--paper-card) 100%);}
+  .service-card .tag{font-family:var(--mono);font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal-deep);background:rgba(47,111,107,0.1);padding:4px 10px;border-radius:6px;align-self:flex-start;}
+  .service-card h3{margin-top:16px;}
+  .service-card .price{font-family:var(--mono);font-size:15px;color:var(--ink);margin-top:8px;font-weight:500;}
+  .service-card p.desc{margin-top:12px;font-size:14.5px;color:var(--ink-soft);flex:1;}
+
+  /* ---------- AUDIENCE CHIPS ---------- */
+  .chip-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+  .chip{
+    font-family:var(--sans);font-size:14px;font-weight:500;
+    background:var(--paper-card);border:1px solid var(--line);
+    padding:9px 16px;border-radius:999px;color:var(--ink-soft);
+  }
+
+  /* ---------- ABOUT / DETAILS ---------- */
+  .about-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:48px;align-items:start;}
+  @media (max-width:860px){ .about-grid{grid-template-columns:1fr;} }
+  .founder-badge{
+    font-family:var(--mono);font-size:12.5px;color:var(--teal-deep);
+    background:rgba(47,111,107,0.08);border:1px solid rgba(47,111,107,0.2);
+    padding:6px 12px;border-radius:8px;display:inline-block;margin-bottom:14px;
+  }
+  details.readmore{margin-top:20px;border-top:1px solid var(--line);padding-top:16px;}
+  details.readmore summary{
+    cursor:pointer;font-family:var(--mono);font-size:13.5px;color:var(--teal-deep);
+    font-weight:500;letter-spacing:0.02em;list-style:none;display:flex;align-items:center;gap:8px;
+  }
+  details.readmore summary::-webkit-details-marker{display:none;}
+  details.readmore summary::after{content:"+";font-size:16px;margin-left:2px;}
+  details.readmore[open] summary::after{content:"–";}
+  details.readmore .full-story{margin-top:16px;font-size:15px;color:var(--ink-soft);line-height:1.7;}
+  details.readmore .full-story p{margin-top:12px;}
+
+  /* ---------- FINAL CTA ---------- */
+  .cta-band{background:var(--teal);color:var(--white);border-radius:20px;padding:52px 44px;text-align:center;}
+  .cta-band h2{color:var(--white);}
+  .cta-band p{margin-top:12px;color:rgba(255,253,248,0.85);font-size:16.5px;}
+  .cta-band .cta-row{justify-content:center;margin-top:28px;}
+  .cta-band .btn{background:var(--gold);color:var(--ink);border-color:var(--gold);}
+  .cta-band .btn:hover{background:#dcb639;box-shadow:0 6px 18px rgba(201,162,39,0.35);}
+  .cta-band .btn-ghost{border-color:rgba(255,253,248,0.4);color:var(--white);}
+  .cta-band .btn-ghost:hover{background:rgba(255,253,248,0.1);border-color:var(--white);}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:36px 0 48px;}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:13.5px;color:var(--ink-soft);}
+  footer a{text-decoration:none;color:var(--ink-soft);}
+  footer a:hover{color:var(--teal-deep);}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+</style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="wrap">
-    <span class="brand">Signal &amp; Script</span>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#start" class="nav-cta">Get started</a>
+<header class="site">
+  <div class="nav">
+    <a class="logo" href="#top"><span class="dot"></span>Signal & Script</a>
+    <nav class="links">
+      <a class="hide-mobile" href="#problem">Why it happens</a>
+      <a class="hide-mobile" href="#how">How it works</a>
+      <a class="hide-mobile" href="#services">Services</a>
+      <a class="hide-mobile" href="#about">About</a>
+      <a class="btn btn-sm" href="https://tally.so/r/OD94qR" target="_blank" rel="noopener">Get started</a>
     </nav>
   </div>
 </header>
 
-<main>
+<main id="top">
 
+  <!-- HERO -->
   <section class="hero">
-    <div class="wrap">
-      <h1>I assess how your business systems actually run — then build the right fix.</h1>
-      <a href="#start" class="btn btn-primary">Tell me what you need</a>
-    </div>
-  </section>
-
-  <section id="why-assessment" class="education">
-    <div class="wrap">
-      <h2>Why Start With an Assessment?</h2>
-      <p>Most business owners think about efficiency, quality, cost, and customer satisfaction as separate problems — a slow order here, an inconsistent product there, a complaint somewhere else. They rarely connect the dots back to a single root cause: the process behind the work.</p>
-      <p>Every one of those outcomes is a direct result of how a business's processes are actually structured — not how they're supposed to work on paper, but how they really run day to day. A process with no clear handoff creates delays. A process with no written standard creates inconsistent quality. A process that depends on one person's memory creates risk the moment that person is unavailable. A process with no feedback loop means problems repeat instead of getting fixed.</p>
-      <p>This is the same principle behind ISO 9001 quality management: sustainable improvement doesn't come from fixing symptoms one at a time — it comes from understanding and improving the process that produces them.</p>
-      <p class="list-lead">How process quality actually drives outcomes:</p>
-      <ul class="outcome-list">
-        <li><strong>Efficiency</strong> — a clear, well-defined process cuts out wasted time and unnecessary steps</li>
-        <li><strong>Consistency &amp; quality</strong> — a process that's documented and repeatable produces the same result every time, for every customer</li>
-        <li><strong>Cost savings</strong> — fixing a process once is cheaper than repeatedly fixing the mistakes it keeps causing</li>
-        <li><strong>Customer satisfaction</strong> — customers feel your processes directly, in how fast you respond, how reliable delivery is, and how consistent your product or service is</li>
-      </ul>
-      <p>That's why Signal &amp; Script starts every engagement with an assessment, not a sales pitch. Before we recommend anything, we map how your business actually works today. Once that's clear, the right fix becomes obvious — and the outcomes that matter most to you follow naturally from getting the process right.</p>
-    </div>
-  </section>
-
-  <section id="about" class="about">
-    <div class="wrap">
-      <h2>A Note From the Founder</h2>
-      <p>Before Signal &amp; Script, I spent seven years as an auditor at Anglo Platinum, embedded in the maintenance and repair processes for some of the largest and most expensive mining equipment in the world — excavators, drill rigs, and haul trucks from Caterpillar and Komatsu, crushers from FLSmidth and Metso, pumps and vibrating screens from Weir Minerals, and the repair of the massive hydraulic cylinders that power this equipment. I audited the companies responsible for repairing it, holding their processes to a level of scrutiny most industries never see.</p>
-      <p>That scrutiny exists for a reason. In mining and heavy engineering, tolerances are measured in fractions of a millimetre, and the cost of a process failure isn't just downtime — it's equipment worth millions, and in some environments, real physical risk. There's no room for "good enough." After seven years in that world, I spent two more years running my own consultancy doing the same work independently.</p>
-      <p>Before I ever audited a process, I worked inside one. I started my career as a piping fabricator and worked my way up through foreman, supervisor, QC inspector, senior QC inspector, and QC manager — I've seen how a process actually runs from the factory floor, not just from a clipboard.</p>
-      <p>That's the discipline behind Signal &amp; Script: the same process-first thinking used to keep multi-million-rand mining equipment safe and reliable, applied to the everyday systems running your business — whatever that business is.</p>
-      <p class="signature">— Rory Lodewick, Founder, Signal &amp; Script</p>
-    </div>
-  </section>
-
-  <section id="beyond-engineering" class="industries">
-    <div class="wrap">
-      <h2>This Isn't Just for Engineering and Manufacturing</h2>
-      <p>The process-first thinking behind Signal &amp; Script comes from an industry where a single misstep can cost millions or put someone at risk — but that same thinking works just as well, often more simply, for every other kind of business.</p>
-      <p>Attorneys, doctors, dentists, physiotherapists, veterinarians, accountants, architects, real estate agents, plumbers, electricians, HVAC technicians, builders, mechanics, hairdressers and beauty therapists, restaurants and cafes, caterers, retailers, cleaning companies, landscapers, photographers, event planners, fitness studios, and childcare centres — all of these run on a process, whether or not anyone's ever written it down.</p>
-      <p>If anything, most of these businesses are simpler to map than the mining and heavy engineering processes I spent years auditing — fewer moving parts, fewer handoffs, fewer people involved. That's good news for you: it means less to untangle, and a faster path to a clear picture of how your business actually runs.</p>
-      <p>Your expertise is yours — a dentist's clinical skill or an attorney's legal judgment isn't something we touch. What we look at is everything around that expertise: how a client or patient moves from first contact to being helped, and where that journey gets slower, less consistent, or harder than it needs to be.</p>
-    </div>
-  </section>
-
-  <section id="what-you-get" class="deliverables">
-    <div class="wrap">
-      <h2>What You Actually Get</h2>
-      <p>Every assessment ends in one of two recommendations — sometimes both, depending on what we find.</p>
-      <p><strong>A written SOP or workflow instruction document</strong> — for processes that should stay in human hands, but currently run on memory rather than a clear, repeatable standard. This turns "how we do it" from something that lives in one person's head into something anyone on your team can follow the same way, every time.</p>
-      <p><strong>Automation</strong> — for all or part of a process that doesn't need a person doing it manually. Not every step needs a human touch; some just need the right connection built once, so the work happens reliably in the background instead of eating into someone's day.</p>
-      <p>Which one applies — and where the line falls — is exactly what the assessment figures out. You don't need to know what's technically possible before you start; that's our job, not yours.</p>
-      <h3>Why this matters beyond efficiency</h3>
-      <p>Most people think of automation as a cost-saving measure, and it is — but the bigger shift is time. Every task that no longer needs a person is time an owner, or their team, gets back for the things that actually need attention. Owners who've never had that time back often don't realize how much they'd value it until they have it.</p>
-    </div>
-  </section>
-
-  <section id="services" class="services">
-    <div class="wrap">
-      <h2>How I can help</h2>
-      <div class="service-grid">
-
-        <article class="service-card service-card--primary">
-          <p class="service-badge">Where every engagement starts</p>
-          <div class="service-icon" aria-hidden="true">🔍</div>
-          <h3>Business Systems Assessment</h3>
-          <p>I map how your business actually runs today — the real handoffs, the tools in use, where things break down — using the same process-integrity thinking behind seven years of formal audits. It's how we find your real bottleneck before recommending anything. (R350 flat fee)</p>
-        </article>
-
-        <article class="service-card">
-          <div class="service-icon" aria-hidden="true">⚙️</div>
-          <h3>Workflow Automation</h3>
-          <p>Right now, automation is the most common fix an assessment turns up — connecting the handoffs in your business so nothing gets dropped. As I take on more assessments, the toolkit will grow to match what clients actually need.</p>
-        </article>
-
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Business systems assessment</p>
+        <h1>Stop firefighting.<br>Start running on <em>systems</em>.</h1>
+        <p class="sub">I map how your business actually runs today, then fix the one process that's quietly costing you the most time — with a written standard, an automation, or both.</p>
+        <div class="cta-row">
+          <a class="btn" href="https://tally.so/r/OD94qR" target="_blank" rel="noopener">Get your assessment — R350</a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+        <p class="fine">FLAT FEE · NO RETAINER · WRITTEN REPORT YOU CAN ACT ON</p>
+      </div>
+      <div class="signal-art" aria-hidden="true">
+        <svg viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="draw-path" d="M10 170 L45 60 L65 190 L90 40 L115 150 L140 90 L165 170 L195 110 C 230 90, 260 100, 290 100 C 330 100, 350 100, 390 100"
+                stroke="#EDE8DD" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+          <circle class="pulse-dot" cx="390" cy="100" r="6" fill="#C9A227"/>
+        </svg>
+        <div class="signal-caption">
+          <span>signal: reacting to what breaks</span>
+          <span>→ script: a fix that holds</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="any-size" class="any-size">
+  <div class="wrap"><div class="divider"></div></div>
+
+  <!-- WHY THIS KEEPS HAPPENING / FIGHT MODE -->
+  <section id="problem" class="band-dark">
     <div class="wrap">
-      <h2>Not Just for Small Businesses</h2>
-      <p>Most small businesses are essentially one process — five to ten steps from a customer's first contact to being paid. A large company isn't fundamentally different; it's usually a collection of smaller processes, each with its own five-to-ten-step flow, running inside one bigger organization.</p>
-      <p>That's why company size doesn't change how we work. Whether you're a two-person operation or a large corporation, we assess one process at a time — treating each department, team, or workflow as its own small business for the purposes of the assessment. A large company might need several assessments, one per process; a small business usually needs just one. Either way, the method is the same.</p>
+      <div class="section-head">
+        <p class="eyebrow">Why this keeps happening</p>
+        <h2>Every business has one role that keeps breaking.</h2>
+        <p class="lede">Ask most owners what's actually stressing them and it's rarely "everything." It's one thing — the handoff nobody wrote down, the report that only makes sense if one person runs it, the step that only works because you personally double-check it, every time.</p>
+      </div>
+      <div class="card-grid-3">
+        <div class="pain-card">
+          <p class="num">01</p>
+          <h3>Fight mode, not run mode</h3>
+          <p>When a process runs on memory and hustle instead of a system, every day gets spent reacting — chasing what slipped, covering for who's out, fixing the same mistake again.</p>
+        </div>
+        <div class="pain-card">
+          <p class="num">02</p>
+          <h3>One person, one risk</h3>
+          <p>If your business stalls the moment one person is sick, on leave, or just busy, that's not loyalty — that's an unwritten process wearing a name tag.</p>
+        </div>
+        <div class="pain-card">
+          <p class="num">03</p>
+          <h3>Systems give days back</h3>
+          <p>A documented step or a built automation doesn't just save time once. It removes that specific stress permanently — every day it runs, without you.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="start" class="start">
+  <!-- WHY START WITH ASSESSMENT / OUTCOMES -->
+  <section id="why">
     <div class="wrap">
-      <h2>Ready to start?</h2>
-      <p>Tell me a bit about what you need — takes a couple of minutes.</p>
-      <p class="form-price">The assessment is R350 — a flat fee covering a systems review of your business, or one process, department, or production line within a larger company, up to 12 steps from start to end. If your process has more than 12 steps, we'll revise the price accordingly once we've reviewed your intake form. Either way, you'll get a written summary report you can act on.</p>
-      <p class="form-note">Take your time with this. If you have a team, it's worth filling this in together — the more accurate and detailed your answers, the faster and more useful your assessment will be.</p>
-      <p class="form-note">Big company, not a small business? You're still in the right place — if you're part of a larger organization, treat one process or department (a fabrication line, an engineering workflow, one team's process) as its own small business when you fill this in. We assess one process at a time, at any scale.</p>
+      <div class="section-head">
+        <p class="eyebrow">The idea behind the method</p>
+        <h2>Efficiency, quality, cost, and happy customers aren't separate problems.</h2>
+        <p class="lede">They're all downstream of one thing: how your process actually runs day to day, not how it's supposed to work on paper. Fix the process once, and all four follow.</p>
+      </div>
+      <div class="card-grid-4">
+        <div class="stat-card">
+          <p class="glyph">⏱</p>
+          <h3>Efficiency</h3>
+          <p>A clear process cuts wasted time and steps nobody needs.</p>
+        </div>
+        <div class="stat-card">
+          <p class="glyph">✓</p>
+          <h3>Consistency</h3>
+          <p>A documented, repeatable process gives the same result every time.</p>
+        </div>
+        <div class="stat-card">
+          <p class="glyph">R</p>
+          <h3>Cost savings</h3>
+          <p>Fixing a process once is cheaper than fixing what it keeps breaking.</p>
+        </div>
+        <div class="stat-card">
+          <p class="glyph">♥</p>
+          <h3>Happier customers</h3>
+          <p>Customers feel your process directly — speed, reliability, consistency.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <div class="form-embed">
-        <iframe
-          data-tally-src="https://tally.so/embed/OD94qR?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-          loading="lazy"
-          width="100%"
-          height="600"
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
-          title="Signal & Script business assessment form">
-        </iframe>
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How it works</p>
+        <h2>Three steps. No blind guessing at what you need.</h2>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">01</span>
+          <h3>Assessment</h3>
+          <p>We map how the process actually runs today — every handoff, tool, and workaround — for a flat R350.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <h3>Confirm</h3>
+          <p>You get a plain-language summary of what's really happening, and confirm it's accurate before anything else moves.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <h3>Fix</h3>
+          <p>A written standard, an automation, or both — whichever actually solves the bottleneck we found. Nothing is assumed upfront.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What you can get</p>
+        <h2>Two ways to fix a broken process.</h2>
+        <p class="lede">The assessment tells you which one — or whether you need both.</p>
+      </div>
+      <div class="card-grid-3">
+        <div class="service-card featured">
+          <span class="tag">Start here</span>
+          <h3>Business Systems Assessment</h3>
+          <p class="price">R350 flat fee</p>
+          <p class="desc">A structured review of how a process, department, or your whole small business actually runs today — up to 12 steps, start to end. Ends in a written report and a clear recommendation.</p>
+          <a class="btn btn-sm" style="margin-top:18px;align-self:flex-start;" href="https://tally.so/r/OD94qR" target="_blank" rel="noopener">Book the assessment</a>
+        </div>
+        <div class="service-card">
+          <span class="tag">Written process</span>
+          <h3>SOP Documentation</h3>
+          <p class="price">R350 + R60 / step</p>
+          <p class="desc">For work that should stay in human hands, but currently only lives in one person's head. Turns "how we do it" into something your whole team can follow, the same way, every time.</p>
+        </div>
+        <div class="service-card">
+          <span class="tag">Automation</span>
+          <h3>Workflow Automation</h3>
+          <p class="price">From R900 + R200 / step</p>
+          <p class="desc">For the parts of the process that don't need a person doing them manually. The handoffs get connected once, so the work happens reliably in the background — and stays off someone's plate for good.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section id="who">
+    <div class="wrap-narrow">
+      <p class="eyebrow">Who this is for</p>
+      <h2>If it runs on a process, this applies — and everything does.</h2>
+      <p class="lede" style="margin-top:14px;">Attorneys, doctors, dentists, vets, accountants, architects, agents, tradespeople, salons, restaurants, retailers, cleaning and landscaping companies, photographers, event planners, fitness studios, childcare — every one of these has a start-to-finish process, written down or not.</p>
+      <div class="chip-row">
+        <span class="chip">Professional services</span>
+        <span class="chip">Healthcare & clinics</span>
+        <span class="chip">Trades & contractors</span>
+        <span class="chip">Retail & hospitality</span>
+        <span class="chip">Salons & studios</span>
+        <span class="chip">Field & home services</span>
+        <span class="chip">Large companies, one process at a time</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div>
+        <p class="founder-badge">Founder-led</p>
+        <h2>Why a process person, not a salesperson.</h2>
+      </div>
+      <div>
+        <p style="font-size:16.5px;color:var(--ink-soft);line-height:1.65;">I'm Rory. Before Signal & Script, I spent seven years as an ISO 9001-certified auditor at Anglo Platinum, holding the companies that repair multi-million-rand mining equipment to a level of process scrutiny most industries never see. Before that, I worked my way up from piping fabricator to QC manager — so I've run a process, not just audited one.</p>
+        <p style="font-size:16.5px;color:var(--ink-soft);line-height:1.65;margin-top:14px;">That's the discipline behind Signal & Script: the same thinking used to keep massive equipment safe and reliable, applied to the everyday systems running your business — whatever it is.</p>
+
+        <details class="readmore">
+          <summary>Read the full story</summary>
+          <div class="full-story">
+            <p>Before Signal & Script, I spent seven years as an ISO 9001:2015-certified auditor at Anglo Platinum, embedded in the maintenance and repair processes for some of the largest and most expensive mining equipment in the world — excavators, drill rigs, and haul trucks from Caterpillar and Komatsu, crushers from FLSmidth and Metso, pumps and vibrating screens from Weir Minerals, and the repair of the massive hydraulic cylinders that power this equipment. I audited the companies responsible for repairing it, holding their processes to a level of scrutiny most industries never see.</p>
+            <p>That scrutiny exists for a reason. In mining and heavy engineering, tolerances are measured in fractions of a millimetre, and the cost of a process failure isn't just downtime — it's equipment worth millions, and in some environments, real physical risk. There's no room for "good enough." After seven years in that world, I spent two more years running my own consultancy doing the same work independently.</p>
+            <p>Before I ever audited a process, I worked inside one. I started my career as a piping fabricator and worked my way up through foreman, supervisor, QC inspector, senior QC inspector, and QC manager — I've seen how a process actually runs from the factory floor, not just from a clipboard.</p>
+            <p>Most of the businesses I work with now are simpler to map than a mining process — fewer moving parts, fewer handoffs, fewer people involved. That's good news: it means less to untangle, and a faster path to a clear picture of how your business actually runs. Your expertise stays yours — a dentist's clinical skill or an attorney's legal judgment isn't something I touch. What I look at is everything around that expertise: how a client or patient moves from first contact to being helped, and where that journey gets slower, less consistent, or harder than it needs to be.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="start">
+    <div class="wrap">
+      <div class="cta-band">
+        <p class="eyebrow" style="justify-content:center;color:rgba(255,253,248,0.85);">Ready when you are</p>
+        <h2>Tell me what's not working. Takes a couple of minutes.</h2>
+        <p>R350 flat — a full systems review of your business, or one process, department, or line within a larger company, up to 12 steps. You'll get a written summary you can act on.</p>
+
+        <div id="tally-embed-wrap" style="background:var(--white); border-radius:16px; padding:8px; margin-top:28px;">
+          <iframe data-tally-src="https://tally.so/embed/OD94qR?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            loading="lazy"
+            width="100%"
+            height="500"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            title="Business Systems Assessment — Signal & Script">
+          </iframe>
+        </div>
+        <script>
+          var d = document, w = "https://tally.so/widgets/embed.js", v = function () {
+            "undefined" != typeof Tally ? Tally.loadEmbeds() : d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function (e) {
+              e.src = e.dataset.tallySrc;
+            }));
+          };
+          if ("undefined" != typeof Tally) v();
+          else if (d.querySelector('script[src="' + w + '"]') == null) {
+            var s = d.createElement("script");
+            s.src = w, s.onload = v, s.onerror = v, d.body.appendChild(s);
+          }
+        </script>
+
+        <div class="cta-row">
+          <a class="btn btn-ghost" href="mailto:signalandscript@gmail.com">Email a question first</a>
+        </div>
       </div>
     </div>
   </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <p>&copy; 2026 Signal &amp; Script.</p>
+<footer>
+  <div class="wrap footer-row">
+    <span>© 2026 Signal & Script.</span>
+    <span><a href="mailto:signalandscript@gmail.com">signalandscript@gmail.com</a></span>
   </div>
 </footer>
 
 <script>
-  var d = document, w = "https://tally.so/widgets/embed.js",
-    v = function () {
-      "undefined" != typeof Tally
-        ? Tally.loadEmbeds()
-        : d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) {
-            e.src = e.dataset.tallySrc;
-          });
-    };
-  if ("undefined" != typeof Tally) v();
-  else if (d.querySelector('script[src="' + w + '"]') == null) {
-    var s = d.createElement("script");
-    s.src = w;
-    s.onload = v;
-    s.onerror = v;
-    d.body.appendChild(s);
-  }
+  // Scroll-reveal for section heads and cards
+  const targets = document.querySelectorAll('.pain-card, .stat-card, .step, .service-card, .section-head, .about-grid > div');
+  targets.forEach(el => el.classList.add('reveal'));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); } });
+  }, { threshold: 0.12 });
+  targets.forEach(el => io.observe(el));
 </script>
 
 </body>
